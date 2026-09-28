@@ -63,9 +63,10 @@ export function useCamera(): UseCameraReturn {
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       streamRef.current = stream;
 
+      // Attach to video if ref is ready now or via effect
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
-        await videoRef.current.play();
+        videoRef.current.play().catch(e => console.warn('Video play error:', e));
       }
 
       const track = stream.getVideoTracks()[0];
@@ -86,6 +87,16 @@ export function useCamera(): UseCameraReturn {
       setIsStreaming(false);
     }
   }, [stopCamera]);
+
+  // Keep video srcObject attached if videoRef mounts after stream starts
+  useEffect(() => {
+    if (isStreaming && streamRef.current && videoRef.current) {
+      if (videoRef.current.srcObject !== streamRef.current) {
+        videoRef.current.srcObject = streamRef.current;
+        videoRef.current.play().catch(e => console.warn('Video play error:', e));
+      }
+    }
+  }, [isStreaming]);
 
   const captureFrame = useCallback((): string | null => {
     if (!videoRef.current || !canvasRef.current || !isStreaming) return null;

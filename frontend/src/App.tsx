@@ -49,6 +49,13 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
+  // Auto-start camera when switching to camera state
+  useEffect(() => {
+    if (appState === 'camera' && !camera.isStreaming && !camera.error) {
+      camera.startCamera();
+    }
+  }, [appState, camera.isStreaming, camera.error, camera.startCamera]);
+
   // Handle garment upload
   const handleFileSelect = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
