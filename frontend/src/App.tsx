@@ -1,7 +1,7 @@
 /**
  * Main App Component — AI Virtual Try-On
  */
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import { api, type TryOnStatusResponse } from './services/api';
 import { useCamera } from './hooks/useCamera';
@@ -31,7 +31,6 @@ function App() {
   const [deviceInfo, setDeviceInfo] = useState<DeviceInfo | null>(null);
   const [uploadLoading, setUploadLoading] = useState(false);
 
-  const _fileInputRef = useRef<HTMLInputElement>(null);
   const camera = useCamera();
 
   // Check backend health
