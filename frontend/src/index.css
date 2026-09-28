@@ -1,0 +1,9 @@
+/* Global reset — design system is in App.css */
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}

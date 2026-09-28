@@ -1,0 +1,26 @@
+# AI Virtual Try-On — Python Dependencies
+
+# Web framework
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+pydantic-settings==2.7.1
+httpx==0.28.1
+
+# Image processing
+opencv-python-headless==4.11.0.86
+Pillow==11.1.0
+numpy==1.26.4
+
+# AI / ML
+mediapipe==0.10.21
+rembg==2.0.62
+onnxruntime==1.20.1
+
+# PyTorch (Apple Silicon optimized)
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.5.1
+torchvision==0.20.1
+
+# System monitoring
+psutil==6.1.1
